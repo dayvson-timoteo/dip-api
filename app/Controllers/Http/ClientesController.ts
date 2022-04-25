@@ -13,18 +13,18 @@ export default class ClientesController {
 
     return {
       message: 'Cliente cadastrado com sucesso',
-      data: cliente,
+      cliente: cliente,
     }
   }
   public async index() {
     const clientes = await Cliente.all()
 
-    return { data: clientes }
+    return { cliente: clientes }
   }
   public async show({ params }: HttpContextContract) {
     const cliente = await Cliente.findOrFail(params.id)
 
-    return { data: cliente }
+    return { cliente: cliente }
   }
   public async destroy({ params }: HttpContextContract) {
     const cliente = await Cliente.findOrFail(params.id)
@@ -73,5 +73,7 @@ export default class ClientesController {
     cliente.duplicada = body.duplicada
     cliente.links = body.links
     cliente.obs = body.obs
+
+    return { message: 'Cliente atualizado com sucesso' }
   }
 }
